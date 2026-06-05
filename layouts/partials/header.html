@@ -1,0 +1,22 @@
+<header class="site-header">
+  <a href="/" class="site-title">Judy Rosenthal</a>
+  <nav>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">&#9776;</button>
+    <ul class="nav-menu" id="nav-menu">
+      {{- range site.Menus.main }}
+      {{- if not .Parent }}
+      <li{{ if .HasChildren }} class="has-children"{{ end }}>
+        <a href="{{ .URL }}">{{ .Name }}</a>
+        {{- if .HasChildren }}
+        <ul class="submenu">
+          {{- range .Children }}
+          <li><a href="{{ .URL }}">{{ .Name }}</a></li>
+          {{- end }}
+        </ul>
+        {{- end }}
+      </li>
+      {{- end }}
+      {{- end }}
+    </ul>
+  </nav>
+</header>

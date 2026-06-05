@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="{{ site.Language.Locale }}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>
+    {{- if .IsHome -}}
+    Judy Rosenthal
+    {{- else -}}
+    {{ .Title }} | Judy Rosenthal
+    {{- end -}}
+  </title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="{{ block "body-class" . }}page-content{{ end }}">
+
+  {{ partial "header.html" . }}
+
+  {{ block "main" . }}{{ end }}
+
+  {{ partial "footer.html" . }}
+
+  <script>
+    /* ── Mobile nav ── */
+    (function () {
+      var toggle = document.getElementById('nav-toggle');
+      var menu   = document.getElementById('nav-menu');
+      if (!toggle || !menu) return;
+
+      toggle.addEventListener('click', function () {
+        menu.classList.toggle('open');
+      });
+
+      /* On mobile, tapping a parent item opens its submenu */
+      var parents = document.querySelectorAll('.has-children > a');
+      for (var i = 0; i < parents.length; i++) {
+        parents[i].addEventListener('click', function (e) {
+          if (window.innerWidth <= 768) {
+            e.preventDefault();
+            this.parentElement.classList.toggle('open');
+          }
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

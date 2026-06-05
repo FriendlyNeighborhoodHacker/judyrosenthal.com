@@ -1,3 +1,163 @@
-baseURL = 'https://example.org/'
+baseURL = 'https://judyrosenthal.com/'
 locale = 'en-us'
-title = 'My New Hugo Project'
+title = 'Judy Rosenthal'
+
+[menu]
+
+  # ── Biography ──────────────────────────────────────────────
+  [[menu.main]]
+    identifier = "biography"
+    name       = "Biography"
+    url        = "/biography/"
+    weight     = 1
+  [[menu.main]]
+    parent = "biography"
+    name   = "Childhood"
+    url    = "/biography/childhood/"
+    weight = 1
+  [[menu.main]]
+    parent = "biography"
+    name   = "Artist"
+    url    = "/biography/artist/"
+    weight = 2
+  [[menu.main]]
+    parent = "biography"
+    name   = "Haskell"
+    url    = "/biography/haskell/"
+    weight = 3
+  [[menu.main]]
+    parent = "biography"
+    name   = "Motherhood"
+    url    = "/biography/motherhood/"
+    weight = 4
+  [[menu.main]]
+    parent = "biography"
+    name   = "New York"
+    url    = "/biography/new-york/"
+    weight = 5
+
+  # ── Art ────────────────────────────────────────────────────
+  [[menu.main]]
+    identifier = "art"
+    name       = "Art"
+    url        = "/art/"
+    weight     = 2
+  [[menu.main]]
+    parent = "art"
+    name   = "Bicentennial Project"
+    url    = "/art/bicentennial-project/"
+    weight = 1
+  [[menu.main]]
+    parent = "art"
+    name   = "Houston"
+    url    = "/art/houston/"
+    weight = 2
+  [[menu.main]]
+    parent = "art"
+    name   = "Heritage"
+    url    = "/art/heritage/"
+    weight = 3
+  [[menu.main]]
+    parent = "art"
+    name   = "Cubistic Extensionism"
+    url    = "/art/cubistic-extensionism/"
+    weight = 4
+  [[menu.main]]
+    parent = "art"
+    name   = "Seascapes"
+    url    = "/art/seascapes/"
+    weight = 5
+  [[menu.main]]
+    parent = "art"
+    name   = "Landscapes"
+    url    = "/art/landscapes/"
+    weight = 6
+
+  # ── Recipes ────────────────────────────────────────────────
+  [[menu.main]]
+    identifier = "recipes"
+    name       = "Recipes"
+    url        = "/recipes/"
+    weight     = 3
+  [[menu.main]]
+    parent = "recipes"
+    name   = "Cream Sauce"
+    url    = "/recipes/cream-sauce/"
+    weight = 1
+  [[menu.main]]
+    parent = "recipes"
+    name   = "Cherry Cream Chicken"
+    url    = "/recipes/cherry-cream-chicken/"
+    weight = 2
+  [[menu.main]]
+    parent = "recipes"
+    name   = "Salmon"
+    url    = "/recipes/salmon/"
+    weight = 3
+  [[menu.main]]
+    parent = "recipes"
+    name   = "Asparagus"
+    url    = "/recipes/asparagus/"
+    weight = 4
+  [[menu.main]]
+    parent = "recipes"
+    name   = "Turkey Dressing"
+    url    = "/recipes/turkey-dressing/"
+    weight = 5
+  [[menu.main]]
+    parent = "recipes"
+    name   = "Cabbage Salad"
+    url    = "/recipes/cabbage-salad/"
+    weight = 6
+  [[menu.main]]
+    parent = "recipes"
+    name   = "Meringues"
+    url    = "/recipes/merangues/"
+    weight = 7
+  [[menu.main]]
+    parent = "recipes"
+    name   = "Hello Dollies"
+    url    = "/recipes/hello-dollies/"
+    weight = 8
+  [[menu.main]]
+    parent = "recipes"
+    name   = "Derby Pie"
+    url    = "/recipes/derby-pie/"
+    weight = 9
+
+  # ── Family ─────────────────────────────────────────────────
+  [[menu.main]]
+    identifier = "family"
+    name       = "Family"
+    url        = "/family/"
+    weight     = 4
+  [[menu.main]]
+    parent = "family"
+    name   = "Brian Rosenthal"
+    url    = "/family/brian-rosenthal/"
+    weight = 1
+  [[menu.main]]
+    parent = "family"
+    name   = "Lilly Rosenthal"
+    url    = "/family/lilly-rosenthal/"
+    weight = 2
+  [[menu.main]]
+    parent = "family"
+    name   = "Charlie Rosenthal"
+    url    = "/family/charlie-rosenthal/"
+    weight = 3
+  [[menu.main]]
+    parent = "family"
+    name   = "Eve Rosenthal"
+    url    = "/family/eve-rosenthal/"
+    weight = 4
+  [[menu.main]]
+    parent = "family"
+    name   = "Lucy-Jane Watson"
+    url    = "/family/lucy-jane-watson/"
+    weight = 5
+  [[menu.main]]
+    parent = "family"
+    name   = "Julien David Saks"
+    url    = "/family/julien-david-saks/"
+    weight = 6

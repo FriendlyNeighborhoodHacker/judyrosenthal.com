@@ -1,0 +1,100 @@
+{{- define "body-class" }}page-home{{- end }}
+
+{{- define "main" }}
+<div class="slideshow-wrapper">
+  <div class="slideshow" id="slideshow">
+
+    {{- range $i, $slide := hugo.Data.slides }}
+    {{- $img := resources.Get $slide.image }}
+    {{- if $img }}
+    <div class="slide{{ if eq $i 0 }} active{{ end }}"
+         style="background-image: url('{{ $img.RelPermalink }}')"
+         data-link="{{ $slide.link }}"
+         data-menu-color="{{ $slide.menuColor }}">
+      <div class="slide-title">{{ $slide.title }}</div>
+    </div>
+    {{- end }}
+    {{- end }}
+
+    <button class="slide-arrow prev" id="slide-prev" aria-label="Previous">&lt;</button>
+    <button class="slide-arrow next" id="slide-next" aria-label="Next">&gt;</button>
+
+  </div><!-- /.slideshow -->
+</div><!-- /.slideshow-wrapper -->
+
+<script>
+(function () {
+  var slides  = document.querySelectorAll('.slide');
+  var prevBtn = document.getElementById('slide-prev');
+  var nextBtn = document.getElementById('slide-next');
+  if (!slides.length) return;
+
+  var current = 0;
+  var timer;
+
+  function activate(n) {
+    slides[current].classList.remove('active');
+    current = ((n % slides.length) + slides.length) % slides.length;
+    slides[current].classList.add('active');
+
+    var color = slides[current].dataset.menuColor || 'white';
+    document.body.classList.remove('menu-white', 'menu-black');
+    document.body.classList.add('menu-' + color);
+  }
+
+  function startTimer() {
+    clearInterval(timer);
+    timer = setInterval(function () { activate(current + 1); }, 5000);
+  }
+
+  prevBtn.addEventListener('click', function (e) {
+    e.stopPropagation();
+    activate(current - 1);
+    startTimer();
+  });
+
+  nextBtn.addEventListener('click', function (e) {
+    e.stopPropagation();
+    activate(current + 1);
+    startTimer();
+  });
+
+  /* Clicking the slide itself navigates to its linked page */
+  slides.forEach(function (slide) {
+    slide.addEventListener('click', function () {
+      window.location.href = this.dataset.link;
+    });
+  });
+
+  /* Touch swipe: left = next, right = prev */
+  var touchStartX = 0;
+  var touchStartY = 0;
+  var slideshow = document.getElementById('slideshow');
+
+  slideshow.addEventListener('touchstart', function (e) {
+    touchStartX = e.changedTouches[0].screenX;
+    touchStartY = e.changedTouches[0].screenY;
+  }, { passive: true });
+
+  slideshow.addEventListener('touchend', function (e) {
+    var dx = e.changedTouches[0].screenX - touchStartX;
+    var dy = e.changedTouches[0].screenY - touchStartY;
+    // Only register as a horizontal swipe if horizontal motion dominates
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) {
+      if (dx < 0) {
+        activate(current + 1); // swipe left → next
+      } else {
+        activate(current - 1); // swipe right → prev
+      }
+      startTimer();
+    }
+  }, { passive: true });
+
+  /* Apply the first slide's menu color immediately */
+  var initColor = slides[0].dataset.menuColor || 'white';
+  document.body.classList.add('menu-' + initColor);
+
+  startTimer();
+})();
+</script>
+{{- end }}
