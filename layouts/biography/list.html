@@ -1,8 +1,6 @@
 {{ define "main" }}
 <hr class="content-rule">
 <main class="content-body">
-  <h1 class="section-title">{{ .Title }}</h1>
-
   {{- if .Params.hero }}
   {{- $img := resources.Get .Params.hero }}
   {{- if $img }}
@@ -12,6 +10,8 @@
   </div>
   {{- end }}
   {{- end }}
+
+  <h1 class="section-title">{{ .Title }}</h1>
 
   {{ with .Content }}{{ . }}{{ end }}
 </main>
