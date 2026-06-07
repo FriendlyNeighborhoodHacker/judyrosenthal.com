@@ -1,12 +1,16 @@
 - image: "images/homepage/01_Portrait-JudithAnn Saksjpg.jpg"
   title: "Biography"
   link: "/biography/"
-  menuColor: "white"
+  menuColor: "black"
+  wideMode: "contain"
+  sideColor: "#ffffea"
 
 - image: "images/homepage/02_The_Laura_full.jpg"
   title: "Art > Bicentennial Project"
   link: "/art/bicentennial-project/"
   menuColor: "white"
+  wideMode: "contain"
+  sideColor: "#0e1820"
 
 - image: "images/homepage/03_Courthouse Notecard_cropped.png"
   title: "Art > Houston"
@@ -22,6 +26,8 @@
   title: "Art > Heritage"
   link: "/art/heritage/"
   menuColor: "white"
+  wideMode: "contain"
+  sideColor: "#0a0a14"
 
 - image: "images/homepage/06_The_Southwind_full.jpg"
   title: "Art > Seascapes"
@@ -37,3 +43,5 @@
   title: "Family"
   link: "/family/"
   menuColor: "white"
+  wideMode: "contain"
+  sideColor: "#1a1208"

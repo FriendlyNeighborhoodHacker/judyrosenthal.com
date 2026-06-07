@@ -8,9 +8,10 @@
     {{- $img := resources.Get $slide.image }}
     {{- if $img }}
     <div class="slide{{ if eq $i 0 }} active{{ end }}"
-         style="background-image: url('{{ $img.RelPermalink }}')"
+         style="background-image: url('{{ $img.RelPermalink }}'); background-color: {{ $slide.sideColor | default "#000" }}"
          data-link="{{ $slide.link }}"
-         data-menu-color="{{ $slide.menuColor }}">
+         data-menu-color="{{ $slide.menuColor }}"
+         data-wide-mode="{{ $slide.wideMode | default "cover" }}">
       <div class="slide-title">{{ $slide.title }}</div>
     </div>
     {{- end }}
@@ -24,76 +25,189 @@
 
 <script>
 (function () {
-  var slides  = document.querySelectorAll('.slide');
-  var prevBtn = document.getElementById('slide-prev');
-  var nextBtn = document.getElementById('slide-next');
+  var slides    = document.querySelectorAll('.slide');
+  var prevBtn   = document.getElementById('slide-prev');
+  var nextBtn   = document.getElementById('slide-next');
+  var showEl    = document.getElementById('slideshow');
   if (!slides.length) return;
 
-  var current = 0;
+  var current     = 0;
   var timer;
+  var isAnimating = false;
+  var wasDrag     = false; // distinguish tap from swipe
 
-  function activate(n) {
-    slides[current].classList.remove('active');
-    current = ((n % slides.length) + slides.length) % slides.length;
-    slides[current].classList.add('active');
-
+  /* ── Menu color ── */
+  function updateMenuColor() {
     var color = slides[current].dataset.menuColor || 'white';
     document.body.classList.remove('menu-white', 'menu-black');
     document.body.classList.add('menu-' + color);
   }
 
+  /* ── Auto-advance timer ── */
   function startTimer() {
     clearInterval(timer);
-    timer = setInterval(function () { activate(current + 1); }, 5000);
+    timer = setInterval(function () { activateOpacity(current + 1); }, 5000);
   }
 
+  /* ── Opacity-based activation (auto-advance + arrow buttons) ── */
+  function activateOpacity(n) {
+    if (isAnimating) return;
+    slides[current].classList.remove('active');
+    current = ((n % slides.length) + slides.length) % slides.length;
+    slides[current].classList.add('active');
+    updateMenuColor();
+  }
+
+  /* ── Arrow buttons ── */
   prevBtn.addEventListener('click', function (e) {
     e.stopPropagation();
-    activate(current - 1);
+    activateOpacity(current - 1);
     startTimer();
   });
-
   nextBtn.addEventListener('click', function (e) {
     e.stopPropagation();
-    activate(current + 1);
+    activateOpacity(current + 1);
     startTimer();
   });
 
-  /* Clicking the slide itself navigates to its linked page */
+  /* ── Click to navigate (only if it was a tap, not a drag) ── */
   slides.forEach(function (slide) {
     slide.addEventListener('click', function () {
-      window.location.href = this.dataset.link;
+      if (!wasDrag) window.location.href = this.dataset.link;
     });
   });
 
-  /* Touch swipe: left = next, right = prev */
-  var touchStartX = 0;
-  var touchStartY = 0;
-  var slideshow = document.getElementById('slideshow');
+  /* ── Drag-reveal touch handling ── */
+  var touchStartX  = 0;
+  var touchStartY  = 0;
+  var isDragging   = false;
+  var adjIdx       = -1;   /* index of the one adjacent slide being revealed */
 
-  slideshow.addEventListener('touchstart', function (e) {
+  /* Reset inline drag styles without flashing.
+     1. Disable transitions & pin opacity to correct CSS-equivalent value (no paint yet).
+     2. Reset transforms (instant — no transitions active).
+     3. One rAF later: clear inline overrides so CSS takes over cleanly. */
+  function cleanupDrag() {
+    adjIdx = -1;
+    for (var i = 0; i < slides.length; i++) {
+      slides[i].style.transition = 'none';
+      slides[i].style.transform  = '';
+      slides[i].style.opacity    = slides[i].classList.contains('active') ? '1' : '0';
+    }
+    requestAnimationFrame(function () {
+      for (var i = 0; i < slides.length; i++) {
+        slides[i].style.transition = '';
+        slides[i].style.opacity    = '';
+      }
+    });
+  }
+
+  /* Commit to a new slide after a successful drag */
+  function commitToSlide(newIdx) {
+    slides[current].classList.remove('active');
+    current = newIdx;
+    slides[current].classList.add('active');
+    updateMenuColor();
+    cleanupDrag();
+    isAnimating = false;
+  }
+
+  showEl.addEventListener('touchstart', function (e) {
+    if (e.target.closest('.slide-arrow')) return;
+    if (e.changedTouches.length !== 1 || isAnimating) return;
     touchStartX = e.changedTouches[0].screenX;
     touchStartY = e.changedTouches[0].screenY;
+    isDragging  = false;
+    wasDrag     = false;
+    adjIdx      = -1;
+    /* Nothing else — we do NOT pre-position any slide here.
+       Setup happens in touchmove once direction is confirmed. */
   }, { passive: true });
 
-  slideshow.addEventListener('touchend', function (e) {
+  showEl.addEventListener('touchmove', function (e) {
+    if (e.changedTouches.length !== 1 || isAnimating) return;
     var dx = e.changedTouches[0].screenX - touchStartX;
     var dy = e.changedTouches[0].screenY - touchStartY;
-    // Only register as a horizontal swipe if horizontal motion dominates
-    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) {
-      if (dx < 0) {
-        activate(current + 1); // swipe left → next
-      } else {
-        activate(current - 1); // swipe right → prev
-      }
+
+    if (!isDragging) {
+      if (Math.abs(dx) < 8) return;
+      if (Math.abs(dy) > Math.abs(dx)) return;  /* vertical — let browser scroll */
+      isDragging = true;
+      wasDrag    = true;
+
+      /* First confirmed horizontal move: set up ONLY the one adjacent slide. */
+      var w  = showEl.offsetWidth;
+      adjIdx = dx < 0
+        ? (current + 1) % slides.length
+        : (current - 1 + slides.length) % slides.length;
+
+      slides[current].style.transition  = 'none';
+      slides[adjIdx].style.transition   = 'none';
+      slides[adjIdx].style.opacity      = '1';
+      slides[adjIdx].style.transform    = dx < 0
+        ? 'translateX(' + w + 'px)'
+        : 'translateX(-' + w + 'px)';
+    }
+
+    var w = showEl.offsetWidth;
+    slides[current].style.transform = 'translateX(' + dx + 'px)';
+    slides[adjIdx].style.transform  = dx < 0
+      ? 'translateX(' + (w + dx) + 'px)'
+      : 'translateX(' + (-w + dx) + 'px)';
+  }, { passive: true });
+
+  showEl.addEventListener('touchend', function (e) {
+    if (e.changedTouches.length !== 1) return;
+    if (!isDragging) return;   /* pure tap — no inline styles were set */
+
+    /* Capture local copies; closures must not reference mutable vars */
+    var dx       = e.changedTouches[0].screenX - touchStartX;
+    var w        = showEl.offsetWidth;
+    var fromIdx  = current;
+    var toIdx    = adjIdx;
+    var SNAP     = 'transform 0.3s ease';
+    var BACK     = 'transform 0.2s ease';
+    var isToNext = toIdx === (fromIdx + 1) % slides.length;
+
+    isAnimating = true;
+
+    if (Math.abs(dx) > 50 && toIdx >= 0) {
+      /* ── Commit swipe ── */
+      slides[fromIdx].style.transition = SNAP;
+      slides[toIdx].style.transition   = SNAP;
+      slides[fromIdx].style.transform  = isToNext
+        ? 'translateX(-' + w + 'px)'
+        : 'translateX(' + w + 'px)';
+      slides[toIdx].style.transform    = 'translateX(0)';
+
+      slides[toIdx].addEventListener('transitionend', function onEnd(ev) {
+        if (ev.propertyName !== 'transform') return;
+        slides[toIdx].removeEventListener('transitionend', onEnd);
+        commitToSlide(toIdx);
+      });
       startTimer();
+    } else {
+      /* ── Snap back ── */
+      slides[fromIdx].style.transition = BACK;
+      slides[fromIdx].style.transform  = 'translateX(0)';
+      if (toIdx >= 0) {
+        slides[toIdx].style.transition = BACK;
+        slides[toIdx].style.transform  = isToNext
+          ? 'translateX(' + w + 'px)'
+          : 'translateX(-' + w + 'px)';
+      }
+
+      slides[fromIdx].addEventListener('transitionend', function onEnd(ev) {
+        if (ev.propertyName !== 'transform') return;
+        slides[fromIdx].removeEventListener('transitionend', onEnd);
+        cleanupDrag();
+        isAnimating = false;
+      });
     }
   }, { passive: true });
 
-  /* Apply the first slide's menu color immediately */
-  var initColor = slides[0].dataset.menuColor || 'white';
-  document.body.classList.add('menu-' + initColor);
-
+  /* ── Init ── */
+  updateMenuColor();
   startTimer();
 })();
 </script>

@@ -266,6 +266,15 @@ a {
   }
 }
 
+/* ----- Wide-mode: contain (portrait images on large screens) ----- */
+@media (min-width: 1000px) {
+  .slide[data-wide-mode="contain"] {
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
+}
+
 /* ----- Prev / Next arrows ----- */
 .slide-arrow {
   position: absolute;
