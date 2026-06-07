@@ -1,0 +1,9 @@
+{{- $src   := .Get "src" -}}
+{{- $alt   := .Get "alt" | default "" -}}
+{{- $float := .Get "float" | default "right" -}}
+{{- $img   := resources.Get $src -}}
+{{- if $img -}}
+<figure class="bio-figure bio-{{ $float }}">
+  <img src="{{ $img.RelPermalink }}" alt="{{ $alt }}">
+</figure>
+{{- end -}}

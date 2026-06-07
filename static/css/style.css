@@ -301,6 +301,91 @@ a {
 .slide-arrow.next { right: 6px; }
 
 /* ======================================================
+   BIOGRAPHY — section title + hero banner
+   ====================================================== */
+
+.section-title {
+  font-family: 'Josefin Sans', 'Optima', 'Gill Sans', 'Gill Sans MT', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 300;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+  color: #222;
+}
+
+.section-hero {
+  width: 100%;
+  max-width: 1000px;
+  height: 250px;
+  margin: 0 auto 2.5rem;
+  overflow: hidden;
+}
+
+.section-hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .section-hero {
+    height: 160px;
+  }
+}
+
+/* ======================================================
+   BIOGRAPHY — inline article images
+   ====================================================== */
+
+.bio-figure {
+  margin: 0;
+}
+
+.bio-right {
+  float: right;
+  width: 26%;
+  max-width: 220px;
+  margin: 0 0 1.5rem 2rem;
+}
+
+.bio-left {
+  float: left;
+  width: 26%;
+  max-width: 220px;
+  margin: 0 2rem 1.5rem 0;
+}
+
+.bio-center {
+  display: block;
+  width: 40%;
+  max-width: 320px;
+  margin: 0 auto 2.5rem;
+}
+
+.bio-figure img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .bio-right,
+  .bio-left {
+    float: none;
+    width: 100%;
+    margin: 0 0 1.5rem 0;
+  }
+
+  .bio-center {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+/* ======================================================
    FOOTER
    ====================================================== */
 

@@ -32,9 +32,14 @@ title = 'Judy Rosenthal'
     weight = 4
   [[menu.main]]
     parent = "biography"
+    name   = "Author"
+    url    = "/biography/author/"
+    weight = 5
+  [[menu.main]]
+    parent = "biography"
     name   = "New York"
     url    = "/biography/new-york/"
-    weight = 5
+    weight = 6
 
   # ── Art ────────────────────────────────────────────────────
   [[menu.main]]
