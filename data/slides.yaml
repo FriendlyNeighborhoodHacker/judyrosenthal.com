@@ -4,6 +4,7 @@
   menuColor: "black"
   wideMode: "contain"
   sideColor: "#ffffea"
+  shadowColor: "rgba(255,255,255,0.75)"
 
 - image: "images/homepage/02_The_Laura_full.jpg"
   title: "Art > Bicentennial Project"
@@ -29,7 +30,7 @@
   wideMode: "contain"
   sideColor: "#0a0a14"
 
-- image: "images/homepage/06_The_Southwind_full.jpg"
+- image: "images/homepage/06_The_Southwind_full2.png"
   title: "Art > Seascapes"
   link: "/art/seascapes/"
   menuColor: "white"
@@ -45,3 +46,4 @@
   menuColor: "white"
   wideMode: "contain"
   sideColor: "#1a1208"
+  shadowColor: "rgba(0,0,0,0.75)"

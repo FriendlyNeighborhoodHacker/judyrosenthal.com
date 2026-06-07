@@ -11,7 +11,8 @@
          style="background-image: url('{{ $img.RelPermalink }}'); background-color: {{ $slide.sideColor | default "#000" }}"
          data-link="{{ $slide.link }}"
          data-menu-color="{{ $slide.menuColor }}"
-         data-wide-mode="{{ $slide.wideMode | default "cover" }}">
+         data-wide-mode="{{ $slide.wideMode | default "cover" }}"
+         data-shadow-color="{{ $slide.shadowColor }}">
       <div class="slide-title">{{ $slide.title }}</div>
     </div>
     {{- end }}
@@ -36,15 +37,29 @@
   var isAnimating = false;
   var wasDrag     = false; // distinguish tap from swipe
 
-  /* ── Menu color ── */
+  /* ── Menu color + nav text shadow ── */
   function updateMenuColor() {
     var color = slides[current].dataset.menuColor || 'white';
     document.body.classList.remove('menu-white', 'menu-black');
     document.body.classList.add('menu-' + color);
+
+    var shadowColor = slides[current].dataset.shadowColor || '';
+    var glow = shadowColor
+      ? '0 0 10px ' + shadowColor + ', 0 0 20px ' + shadowColor + ', 0 0 40px ' + shadowColor + ', 0 0 80px ' + shadowColor
+      : '';
+
+    var siteTitle = document.querySelector('.site-title');
+    if (siteTitle) { siteTitle.style.textShadow = glow; }
+
+    var navLinks = document.querySelectorAll('.nav-menu > li > a');
+    for (var i = 0; i < navLinks.length; i++) {
+      navLinks[i].style.textShadow = glow;
+    }
   }
 
   /* ── Auto-advance timer ── */
   function startTimer() {
+    return;
     clearInterval(timer);
     timer = setInterval(function () { activateOpacity(current + 1); }, 5000);
   }
