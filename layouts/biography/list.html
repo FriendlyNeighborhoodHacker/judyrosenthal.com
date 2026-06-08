@@ -4,7 +4,7 @@
   {{- if .Params.hero }}
   {{- $img := resources.Get .Params.hero }}
   {{- if $img }}
-  <div class="section-hero">
+  <div class="section-hero" style="height: {{ .Params.hero_height | default "250px" }}">
     <img src="{{ $img.RelPermalink }}" alt="{{ .Title }}"
          style="object-position: {{ .Params.hero_position | default "center" }}">
   </div>

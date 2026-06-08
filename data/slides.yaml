@@ -11,7 +11,7 @@
   link: "/art/bicentennial-project/"
   menuColor: "white"
   wideMode: "contain"
-  sideColor: "#0e1820"
+  sideColor: "#488cb1"
 
 - image: "images/homepage/03_Courthouse Notecard_cropped.png"
   title: "Art > Houston"
@@ -28,7 +28,7 @@
   link: "/art/heritage/"
   menuColor: "white"
   wideMode: "contain"
-  sideColor: "#0a0a14"
+  sideColor: "#073a73"
 
 - image: "images/homepage/06_The_Southwind_full2.png"
   title: "Art > Seascapes"
