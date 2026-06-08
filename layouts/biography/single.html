@@ -28,12 +28,14 @@
   {{- if $albumImages }}
   <div class="photo-grid" id="photo-grid">
     {{- range $albumImages }}
+    {{- if eq .MediaType.MainType "image" }}
     {{- $thumb := .Fill "350x350 Center" }}
     {{- $filename := path.Base .Name }}
     {{- $desc := index $descriptions $filename | default "" }}
-    <div class="photo-grid-item" data-src="{{ .RelPermalink }}" data-desc="{{ $desc }}">
+    <div class="photo-grid-item" data-src="{{ .RelPermalink }}" data-desc="{{ $desc }}" data-filename="{{ $filename }}">
       <img src="{{ $thumb.RelPermalink }}" alt="{{ $desc }}" loading="lazy">
     </div>
+    {{- end }}
     {{- end }}
   </div>
   {{- end }}
@@ -47,6 +49,7 @@
   <button class="lb-prev" aria-label="Previous">&lsaquo;</button>
   <img class="lb-img" src="" alt="">
   <p class="lb-caption"></p>
+  <p class="lb-filename"></p>
   <button class="lb-next" aria-label="Next">&rsaquo;</button>
 </div>
 <script>
@@ -56,6 +59,7 @@
   var lb    = document.getElementById('lightbox');
   var lbImg = lb.querySelector('.lb-img');
   var lbCap = lb.querySelector('.lb-caption');
+  var lbFn  = lb.querySelector('.lb-filename');
   var cur   = 0;
 
   function show(i) {
@@ -63,6 +67,7 @@
     lbImg.src = items[cur].dataset.src;
     lbImg.alt = items[cur].dataset.desc || '';
     lbCap.textContent = items[cur].dataset.desc || '';
+    lbFn.textContent  = items[cur].dataset.filename || '';
     lb.classList.add('open');
   }
 
