@@ -190,6 +190,10 @@ a {
   margin-bottom: 1.5rem;
 }
 
+.content-body p {
+  margin-bottom: 1.25rem;
+}
+
 /* ======================================================
    FULL-BLEED SLIDESHOW
    ====================================================== */
@@ -374,14 +378,14 @@ a {
 @media (max-width: 768px) {
   .bio-right {
     float: right;
-    width: 44%;
+    width: 46%;
     max-width: none;
     margin: 0 0 1rem 0.75rem;
   }
 
   .bio-left {
     float: left;
-    width: 44%;
+    width: 46%;
     max-width: none;
     margin: 0 0.75rem 1rem 0;
   }
