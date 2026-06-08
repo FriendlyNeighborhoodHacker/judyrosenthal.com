@@ -372,14 +372,22 @@ a {
 }
 
 @media (max-width: 768px) {
-  .bio-right,
+  .bio-right {
+    float: right;
+    width: 44%;
+    max-width: none;
+    margin: 0 0 1rem 0.75rem;
+  }
+
   .bio-left {
-    float: none;
-    width: 100%;
-    margin: 0 0 1.5rem 0;
+    float: left;
+    width: 44%;
+    max-width: none;
+    margin: 0 0.75rem 1rem 0;
   }
 
   .bio-center {
+    float: none;
     width: 100%;
     max-width: none;
   }
