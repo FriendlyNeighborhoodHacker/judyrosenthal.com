@@ -27,19 +27,9 @@ title = 'Judy Rosenthal'
     weight = 3
   [[menu.main]]
     parent = "biography"
-    name   = "Motherhood"
-    url    = "/biography/motherhood/"
-    weight = 4
-  [[menu.main]]
-    parent = "biography"
     name   = "Author"
     url    = "/biography/author/"
     weight = 5
-  [[menu.main]]
-    parent = "biography"
-    name   = "New York"
-    url    = "/biography/new-york/"
-    weight = 6
 
   # ── Art ────────────────────────────────────────────────────
   [[menu.main]]
