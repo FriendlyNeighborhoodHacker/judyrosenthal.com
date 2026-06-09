@@ -400,6 +400,27 @@ a {
 }
 
 /* ======================================================
+   ALBUM ADMIN LINK (dev-only, not shown in production)
+   ====================================================== */
+
+.album-admin-link {
+  margin-bottom: 1rem;
+}
+
+.album-admin-link a {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  color: #888;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.album-admin-link a:hover {
+  color: #222;
+}
+
+/* ======================================================
    PHOTO GRID
    ====================================================== */
 
@@ -582,7 +603,7 @@ a {
     display: none;
   }
 
-  /* Submenus open via JS .open class on mobile */
+  /* Submenus are hidden on mobile — top-level items link directly */
   .nav-menu .submenu {
     position: static;
     box-shadow: none;
@@ -590,10 +611,6 @@ a {
     margin-left: 16px;
     margin-bottom: 4px;
     display: none;
-  }
-
-  .nav-menu > li.open .submenu {
-    display: block;
   }
 
   /* Slide title font tweak on small screens (position is set in the ≤800px block) */

@@ -4,31 +4,32 @@ hero: "images/biography/family3.jpeg"
 hero_position: "center 58%"
 ---
 
-{{< bioimage src="images/biography/julien_holding_judy.jpeg" float="right" alt="Julien Holding Judy" >}}
-{{< bioimage src="images/biography/judy_as_baby.jpeg" float="right" alt="Judy as a baby" >}}
+{{< bioimage link="/biography/childhood/" src="images/biography/julien_holding_judy.jpeg" float="right" alt="Julien Holding Judy" >}}
+{{< bioimage link="/biography/childhood/" src="images/biography/judy_as_baby.jpeg" float="right" alt="Judy as a baby" >}}
 
-Judy Rosenthal was born in Anniston, Alabama to Lucy-Jane Watson Saks and Julien David Saks and moved to Houston when she was four years old.  As a young child, she loved art and horseback riding.  She went to Bellaire High School and earned a BFA from Sophie Newcomb College at Tulane University in Painting and Sculpture where she was the Art Editor, The Tiresian.
-
-{{< bioclear >}}
-
-{{< bioimage src="images/biography/01_The_Laura.jpg" float="left" alt="The Laura" >}}
-{{< bioimage src="images/biography/liberty.png" float="left" alt="Liberty" >}}
-
-Judy was a celebrated artist in Houston, known for her paintings depicting the growth of Houston's downtown and also the Ship Channel.  Her Bicentennial Collection depicting the history of the Port of Houston was accepted by the Smithsonian Institute and the Royal Library at Windsor. 
+[Childhood]({{< relref "/biography/childhood.md" >}}): Judy Rosenthal was born in Anniston, Alabama to Lucy-Jane Watson Saks and Julien David Saks and moved to Houston when she was four years old.  As a young child, she loved art and horseback riding.  She went to Bellaire High School and earned a BFA from Sophie Newcomb College at Tulane University in Painting and Sculpture where she was the Art Editor, The Tiresian.
 
 {{< bioclear >}}
 
-{{< bioimage src="images/biography/haskell_and_judy.jpeg" float="right" alt="Haskell and Judy Rosenthal" >}}
+{{< bioimage link="/biography/artist/" src="images/biography/01_The_Laura.jpg" float="left" alt="The Laura" >}}
+{{< bioimage link="/biography/artist/" src="images/biography/liberty.png" float="left" alt="Liberty" >}}
 
-{{< bioimage src="images/biography/judy_and_haskell2.jpeg" float="right" alt="Haskell and Judy Rosenthal" >}}
-
-Judy married Haskell Rosenthal in 1974 and spent 49 years together, happily married and deeply in love.  In their later years, Judy and Haskell co-wrote books together.  And Haskell would sing songs to Judy, in particular: "You are my sunshine" and "I love you for a hundred thousand reasons."
+Judy was a celebrated [artist]({{< relref "/biography/artist.md" >}}) in Houston, known for her paintings depicting the growth of Houston's downtown and also the Ship Channel.  Her Bicentennial Collection depicting the history of the Port of Houston was accepted by the Smithsonian Institute and the Royal Library at Windsor. 
 
 {{< bioclear >}}
 
-{{< bioimage src="images/biography/flutter.png" float="left" alt="Flutter the Butterfly with the Dull Brown Wings" >}}
-{{< bioimage src="images/biography/dreidel.png" float="left" alt="The Dreidel That Ran Away" >}}
+{{< bioimage link="/biography/haskell/" src="images/biography/haskell_and_judy.jpeg" float="right" alt="Haskell and Judy Rosenthal" >}}
 
+{{< bioimage link="/biography/haskell/" src="images/biography/judy_and_haskell2.jpeg" float="right" alt="Haskell and Judy Rosenthal" >}}
+
+Judy married [Haskell Rosenthal]({{< relref "/biography/haskell.md" >}}) in 1974 and spent 49 years together, happily married and deeply in love.  In their later years, Judy and Haskell co-wrote books together.  And Haskell would sing songs to Judy, in particular: "You are my sunshine" and "I love you for a hundred thousand reasons."
+
+{{< bioclear >}}
+
+{{< bioimage link="/biography/author/" src="images/biography/flutter.png" float="left" alt="Flutter the Butterfly with the Dull Brown Wings" >}}
+{{< bioimage link="/biography/author/" src="images/biography/dreidel.png" float="left" alt="The Dreidel That Ran Away" >}}
+
+[Books]({{< relref "/biography/haskell.md" >}}): 
 She also illustrated and co-authored multiple children's books, including *Flutter the Butterfly with the Dull Brown Wings* (2016), *The Little Dreidel that Ran Away* (2015), *Lilly's Trip to the Lands of Adventure* (2022), and *Spots and Sparky* (2023).
 
 {{< bioclear >}}
@@ -42,7 +43,7 @@ She loved hosting parties and creating artwork.  She was famous for her trays of
 
 {{< bioclear >}}
 
-{{< bioimage src="images/biography/family.jpeg" float="left" alt="The Rosenthal Family" >}}
+{{< bioimage link="/family/" src="images/biography/family.jpeg" float="left" alt="The Rosenthal Family" >}}
 
 Judy had a son Brian in 1978 who studied Computer Science at Harvard and eventually became a Director at Facebook during its growth.  Brian married Jeannie Lang, and they live together in Scarsdale, New York with their three children Lilly, Charlie, and Eve.
 

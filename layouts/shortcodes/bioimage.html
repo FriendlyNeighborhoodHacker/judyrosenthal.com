@@ -1,9 +1,14 @@
 {{- $src   := .Get "src" -}}
 {{- $alt   := .Get "alt" | default "" -}}
 {{- $float := .Get "float" | default "right" -}}
+{{- $link  := .Get "link" | default "" -}}
 {{- $img   := resources.Get $src -}}
 {{- if $img -}}
 <figure class="bio-figure bio-{{ $float }}">
+  {{- if $link -}}
+  <a href="{{ $link }}"><img src="{{ $img.RelPermalink }}" alt="{{ $alt }}"></a>
+  {{- else -}}
   <img src="{{ $img.RelPermalink }}" alt="{{ $alt }}">
+  {{- end -}}
 </figure>
 {{- end -}}

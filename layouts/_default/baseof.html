@@ -34,16 +34,6 @@
         menu.classList.toggle('open');
       });
 
-      /* On mobile, tapping a parent item opens its submenu */
-      var parents = document.querySelectorAll('.has-children > a');
-      for (var i = 0; i < parents.length; i++) {
-        parents[i].addEventListener('click', function (e) {
-          if (window.innerWidth <= 768) {
-            e.preventDefault();
-            this.parentElement.classList.toggle('open');
-          }
-        });
-      }
     })();
   </script>
 </body>
