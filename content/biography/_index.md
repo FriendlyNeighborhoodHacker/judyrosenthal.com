@@ -1,7 +1,8 @@
 ---
 title: "Biography"
-hero: "images/biography/family3.jpeg"
-hero_position: "center 58%"
+hero: "images/homepage/08_family2.jpeg"
+hero_position: "center 18%"
+hero_height: "350px"
 ---
 
 {{< bioimage link="/biography/childhood/" src="images/biography/julien_holding_judy.jpeg" float="right" alt="Julien Holding Judy" >}}

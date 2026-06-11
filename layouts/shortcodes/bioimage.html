@@ -4,11 +4,12 @@
 {{- $link  := .Get "link" | default "" -}}
 {{- $img   := resources.Get $src -}}
 {{- if $img -}}
+{{- $resized := $img.Resize "600x webp" -}}
 <figure class="bio-figure bio-{{ $float }}">
   {{- if $link -}}
-  <a href="{{ $link }}"><img src="{{ $img.RelPermalink }}" alt="{{ $alt }}"></a>
+  <a href="{{ $link }}"><img src="{{ $resized.RelPermalink }}" alt="{{ $alt }}"></a>
   {{- else -}}
-  <img src="{{ $img.RelPermalink }}" alt="{{ $alt }}">
+  <img src="{{ $resized.RelPermalink }}" alt="{{ $alt }}">
   {{- end -}}
 </figure>
 {{- end -}}

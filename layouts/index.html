@@ -7,8 +7,9 @@
     {{- range $i, $slide := hugo.Data.slides }}
     {{- $img := resources.Get $slide.image }}
     {{- if $img }}
+    {{- $resized := $img.Resize "1920x webp" }}
     <div class="slide{{ if eq $i 0 }} active{{ end }}"
-         style="background-image: url('{{ $img.RelPermalink }}'); background-color: {{ $slide.sideColor | default "#000" }}"
+         style="background-image: url('{{ $resized.RelPermalink }}'); background-color: {{ $slide.sideColor | default "#000" }}"
          data-link="{{ $slide.link }}"
          data-menu-color="{{ $slide.menuColor }}"
          data-wide-mode="{{ $slide.wideMode | default "cover" }}"
